@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ta Te Tí</title>
+<title>Tick Tack Toe</title>
 {% load static %}
 <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}">
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 <div class="game-container">
-  <h1>TA TE TÍ</h1>
+  <h1>TICK TACK TOE</h1>
 
   <div class="controls">
     <label>
@@ -34,13 +34,20 @@
   </div>
 
   <p id="status" class="status"></p>
-  <div id="board" aria-label="Tablero de Ta Te Tí"></div>
+  <div id="board" aria-label="Tablero de Tick Tack Toe"></div>
 
   <div class="actions">
     <button id="restartBtn" type="button">Reiniciar partida</button>
   </div>
+  <footer class="footer-copy">
+    <span class="text-cyber-gold">©</span> <span id="currentYear"></span> Todos los derechos reservados • Built with Python & Django • UX/UI Interface • Deployed on Render ®
+  </footer>
+
 </div>
 
 <script src="{% static 'js/game.js' %}"></script>
+<script>
+  document.getElementById("currentYear").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>

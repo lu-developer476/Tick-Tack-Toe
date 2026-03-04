@@ -1,9 +1,9 @@
-# Ta Te Tí con Django
+# Tick Tack Toe con Python y Django
 
-Aplicación web de **Ta Te Tí** desarrollada con Django y JavaScript, con una interfaz minimalista en escala de grises y una estructura simple para desplegar en plataformas como Render.
+Aplicación web de **Tick Tack Toe** desarrollada con **Python y Django**, con lógica en JavaScript, interfaz minimalista en escala de grises y una estructura simple para desplegar en plataformas como Render.
 
 ## Descripción
-Este proyecto implementa una partida de Ta Te Tí para dos jugadores en el navegador. El frontend renderiza el tablero y maneja la lógica principal del juego, mientras que Django actúa como servidor de la aplicación y gestor de archivos estáticos.
+Este proyecto implementa una partida de Tick Tack Toe para dos jugadores en el navegador. El frontend renderiza el tablero y maneja la lógica principal del juego, mientras que el backend hecho con Python y Django actúa como servidor de la aplicación y gestor de archivos estáticos.
 
 ## Características principales
 - Interfaz limpia, responsive y enfocada en la jugabilidad.

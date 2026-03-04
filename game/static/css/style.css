@@ -127,6 +127,19 @@ button:hover {
   justify-content: center;
 }
 
+.footer-copy {
+  margin-top: 2px;
+  text-align: center;
+  color: var(--muted);
+  font-size: clamp(0.64rem, 1.5vw, 0.75rem);
+  line-height: 1.35;
+}
+
+.text-cyber-gold {
+  color: #d8b75b;
+  font-weight: 700;
+}
+
 /* Phones */
 @media (max-width: 575px) {
   .game-container {
@@ -206,5 +219,10 @@ button:hover {
   button {
     padding: 6px;
     font-size: 0.8rem;
+  }
+
+  .footer-copy {
+    font-size: 0.62rem;
+    line-height: 1.25;
   }
 }
