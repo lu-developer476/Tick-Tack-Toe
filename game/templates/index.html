@@ -1,19 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tic Tac Toe</title>
+<title>Ta Te Tí</title>
 {% load static %}
 <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}">
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-
 <div class="game-container">
-<h1>TIC TAC TOE</h1>
-<div id="board"></div>
-<button onclick="resetGame()">Restart</button>
+  <h1>TA TE TÍ</h1>
+
+  <div class="controls">
+    <label>
+      Modo
+      <select id="modeSelect" aria-label="Modo de juego">
+        <option value="pvp">Jugador vs Jugador</option>
+        <option value="ai">Jugador vs IA</option>
+      </select>
+    </label>
+
+    <label>
+      Dificultad IA
+      <select id="difficultySelect" aria-label="Dificultad IA">
+        <option value="1">Nivel 1 · Muy Fácil</option>
+        <option value="2">Nivel 2 · Fácil</option>
+        <option value="3">Nivel 3 · Intermedio</option>
+        <option value="4">Nivel 4 · Difícil</option>
+        <option value="5">Nivel 5 · Experto</option>
+      </select>
+    </label>
+  </div>
+
+  <p id="status" class="status"></p>
+  <div id="board" aria-label="Tablero de Ta Te Tí"></div>
+
+  <div class="actions">
+    <button id="restartBtn" type="button">Reiniciar partida</button>
+  </div>
 </div>
 
 <script src="{% static 'js/game.js' %}"></script>

@@ -7,6 +7,8 @@ Este proyecto implementa una partida de Ta Te Tí para dos jugadores en el naveg
 
 ## Características principales
 - Interfaz limpia, responsive y enfocada en la jugabilidad.
+- Dos modos de juego: Jugador vs Jugador y Jugador vs IA.
+- IA configurable con 5 niveles de dificultad (de muy fácil a experto).
 - Lógica de juego en JavaScript (turnos, victoria, empate y reinicio).
 - Backend en Django listo para entorno local o despliegue en la nube.
 - Configuración de estáticos con WhiteNoise para entornos productivos.
