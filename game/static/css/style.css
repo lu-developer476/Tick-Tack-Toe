@@ -12,44 +12,54 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   margin: 0;
-  min-height: 100vh;
   background: radial-gradient(circle at top, #1e1e1e 0%, var(--bg) 45%);
   color: var(--text);
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px;
+  overflow: hidden;
+  padding: clamp(8px, 2vh, 16px);
 }
 
 .game-container {
-  width: min(100%, 440px);
+  width: min(94vw, 430px);
+  max-height: calc(100vh - 16px);
   background: var(--panel);
   border: 1px solid #3a3a3a;
   border-radius: 14px;
-  padding: 20px;
+  padding: 14px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 h1 {
-  margin: 0 0 16px;
+  margin: 0;
   text-align: center;
-  letter-spacing: 2px;
+  letter-spacing: 1.8px;
+  font-size: clamp(1.05rem, 2.3vw, 1.45rem);
 }
 
 .controls {
   display: grid;
-  gap: 10px;
-  margin-bottom: 14px;
+  gap: 8px;
 }
 
 label {
   display: grid;
-  gap: 6px;
+  gap: 5px;
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 select,
@@ -59,8 +69,8 @@ button {
   background: #141414;
   color: var(--text);
   border-radius: 8px;
-  padding: 10px;
-  font-size: 0.95rem;
+  padding: 8px;
+  font-size: 0.9rem;
 }
 
 button {
@@ -73,18 +83,20 @@ button:hover {
 }
 
 .status {
-  margin: 0 0 14px;
-  min-height: 20px;
+  margin: 0;
+  min-height: 18px;
   text-align: center;
   color: var(--muted);
-  font-weight: bold;
+  font-weight: 700;
+  font-size: 0.9rem;
 }
 
 #board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin: 0 auto 14px;
+  gap: 7px;
+  width: min(78vw, 78vh, 300px);
+  margin: 0 auto;
 }
 
 .cell {
@@ -94,7 +106,7 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.1rem;
+  font-size: clamp(1.5rem, 4.2vw, 2rem);
   cursor: pointer;
   border: 2px solid var(--border);
   border-radius: 10px;
@@ -113,4 +125,86 @@ button:hover {
 .actions {
   display: flex;
   justify-content: center;
+}
+
+/* Phones */
+@media (max-width: 575px) {
+  .game-container {
+    width: 96vw;
+    max-height: calc(100vh - 10px);
+    padding: 10px;
+    gap: 8px;
+  }
+
+  label {
+    font-size: 0.84rem;
+  }
+
+  select,
+  button {
+    padding: 7px;
+    font-size: 0.84rem;
+  }
+
+  #board {
+    width: min(82vw, 46vh, 272px);
+    gap: 6px;
+  }
+}
+
+/* Tablets */
+@media (min-width: 576px) and (max-width: 991px) {
+  .game-container {
+    width: min(92vw, 470px);
+    padding: 12px;
+  }
+
+  #board {
+    width: min(66vw, 52vh, 320px);
+  }
+}
+
+/* Large screens */
+@media (min-width: 992px) {
+  .game-container {
+    width: min(90vw, 460px);
+    max-height: calc(100vh - 24px);
+  }
+
+  #board {
+    width: min(60vw, 48vh, 320px);
+  }
+}
+
+/* Low-height displays / landscape phones */
+@media (max-height: 740px) {
+  .game-container {
+    gap: 7px;
+    padding: 9px;
+  }
+
+  h1 {
+    font-size: 1rem;
+    letter-spacing: 1.2px;
+  }
+
+  label {
+    font-size: 0.8rem;
+  }
+
+  .status {
+    min-height: 16px;
+    font-size: 0.8rem;
+  }
+
+  #board {
+    width: min(56vh, 78vw, 246px);
+    gap: 5px;
+  }
+
+  select,
+  button {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
 }
