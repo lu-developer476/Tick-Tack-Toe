@@ -1,31 +1,116 @@
-
-body{
-background:#111;
-color:#eee;
-font-family:Arial;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
+:root {
+  --bg: #111;
+  --panel: #1b1b1b;
+  --cell: #222;
+  --cell-hover: #2f2f2f;
+  --text: #eee;
+  --muted: #c7c7c7;
+  --border: #555;
 }
 
-#board{
-display:grid;
-grid-template-columns:repeat(3,100px);
-grid-gap:5px;
-margin:20px auto;
+* {
+  box-sizing: border-box;
 }
 
-.cell{
-width:100px;
-height:100px;
-background:#222;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:2rem;
-cursor:pointer;
-border:2px solid #555;
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #1e1e1e 0%, var(--bg) 45%);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
 }
 
-.cell:hover{background:#333;}
+.game-container {
+  width: min(100%, 440px);
+  background: var(--panel);
+  border: 1px solid #3a3a3a;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+h1 {
+  margin: 0 0 16px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.controls {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+select,
+button {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: #141414;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 0.95rem;
+}
+
+button {
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: #262626;
+}
+
+.status {
+  margin: 0 0 14px;
+  min-height: 20px;
+  text-align: center;
+  color: var(--muted);
+  font-weight: bold;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 0 auto 14px;
+}
+
+.cell {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--cell);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.1rem;
+  cursor: pointer;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  user-select: none;
+}
+
+.cell:hover {
+  background: var(--cell-hover);
+}
+
+.cell.disabled {
+  cursor: not-allowed;
+  opacity: 0.9;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
