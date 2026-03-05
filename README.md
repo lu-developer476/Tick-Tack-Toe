@@ -1,4 +1,4 @@
-# Tick Tack Toe con Python y Django
+# Tick Tack Toe
 
 Aplicación web de **Tick Tack Toe** desarrollada con **Python y Django**, con lógica en JavaScript, interfaz minimalista en escala de grises y una estructura simple para desplegar en plataformas como Render.
 
