@@ -10,9 +10,12 @@
 </head>
 <body>
 <div class="game-container">
-  <h1>TICK TACK TOE</h1>
+  <header class="hero">
+    <p class="eyebrow">Ta Te Tí interactivo</p>
+    <h1>TICK TACK TOE</h1>
+  </header>
 
-  <div class="controls">
+  <div class="controls" aria-label="Configuración de partida">
     <label>
       Modo
       <select id="modeSelect" aria-label="Modo de juego">
@@ -31,13 +34,37 @@
         <option value="5">Nivel 5 · Experto</option>
       </select>
     </label>
+
+    <label>
+      Primer turno
+      <select id="starterSelect" aria-label="Jugador que empieza">
+        <option value="X">Empieza X</option>
+        <option value="O">Empieza O</option>
+      </select>
+    </label>
+
+    <label>
+      Tema visual
+      <select id="themeSelect" aria-label="Tema visual">
+        <option value="dark">Modo oscuro</option>
+        <option value="light">Modo claro</option>
+      </select>
+    </label>
   </div>
 
-  <p id="status" class="status"></p>
-  <div id="board" aria-label="Tablero de Tick Tack Toe"></div>
+  <section class="scoreboard" aria-label="Marcador de partidas">
+    <div class="score-card score-x"><span>Jugador X</span><strong id="scoreX">0</strong></div>
+    <div class="score-card"><span>Empates</span><strong id="scoreDraw">0</strong></div>
+    <div class="score-card score-o"><span>Jugador O / IA</span><strong id="scoreO">0</strong></div>
+  </section>
+
+  <p id="status" class="status" aria-live="polite"></p>
+  <div id="board" role="grid" aria-label="Tablero de Tick Tack Toe"></div>
 
   <div class="actions">
+    <button id="undoBtn" type="button">Deshacer jugada</button>
     <button id="restartBtn" type="button">Reiniciar partida</button>
+    <button id="resetScoreBtn" type="button">Borrar marcador</button>
   </div>
   <footer class="footer-copy">
     <span class="text-cyber-gold">©</span> <span id="currentYear"></span> Todos los derechos reservados • Built with Python & Django • UX/UI Interface • Deployed on Render ®
