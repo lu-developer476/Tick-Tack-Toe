@@ -67,24 +67,6 @@ select {
   backdrop-filter: blur(10px);
 }
 
-.hero {
-  text-align: center;
-}
-
-.eyebrow {
-  margin: 0 0 4px;
-  color: var(--accent);
-  font-size: 0.73rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-h1 {
-  margin: 0;
-  letter-spacing: 1.8px;
-  font-size: clamp(1.15rem, 2.5vw, 1.7rem);
-}
 
 .controls {
   display: grid;
