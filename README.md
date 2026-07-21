@@ -11,38 +11,56 @@
 ![Render](https://img.shields.io/badge/Render-Deploy-46E3B7?style=for-the-badge&logo=render&logoColor=black)
 ![License](https://img.shields.io/badge/License-Proprietary-red?style=for-the-badge)
 
-Videojuego web del **Ta Te Tí / Tic-Tac-Toe** hecho con **Python y Django**, con lógica de partida en **JavaScript**, estilos responsivos en **CSS** y configuración simple para ejecución local o despliegue en plataformas como Render.
+Aplicación web del **Ta Te Tí / Tic-Tac-Toe** construida con **Python y Django**. El backend expone una vista Django simple y sirve la plantilla principal; la experiencia de juego vive en el frontend con **JavaScript**, **HTML** y **CSS** responsivo.
 
 ## Estado actual del proyecto
 
-El proyecto se encuentra en estado **funcional**. Actualmente permite jugar partidas completas desde el navegador, conservar preferencias y marcador en `localStorage`, servir la interfaz desde Django y preparar archivos estáticos para producción con WhiteNoise.
+El proyecto está en estado **funcional y jugable**. La versión actual permite iniciar partidas desde el navegador, cambiar la configuración de juego, conservar preferencias y marcador en `localStorage`, y ejecutar la app localmente o en un entorno WSGI como Render.
 
-### Funcionalidades disponibles
+### Alcance implementado
 
-- Juego **Jugador vs Jugador**.
-- Juego **Jugador vs IA** con 5 niveles de dificultad.
-- IA con jugadas aleatorias, bloqueos, búsqueda de victoria y estrategia Minimax en niveles avanzados.
-- Selector de jugador inicial: X u O.
-- Selector de tema visual: modo oscuro y modo claro.
-- Marcador persistente de victorias de X, victorias de O/IA y empates.
-- Botones para reiniciar partida, deshacer jugada y borrar marcador.
+- Tablero 3x3 generado dinámicamente en JavaScript.
+- Modo **Jugador vs Jugador**.
+- Modo **Jugador vs IA**.
+- 5 niveles de dificultad para la IA:
+  - Nivel 1: jugadas aleatorias.
+  - Nivel 2: intentos probabilísticos de ganar o bloquear.
+  - Nivel 3: victoria, bloqueo, centro y movimientos preferidos.
+  - Nivel 4: victoria, bloqueo y Minimax con profundidad limitada.
+  - Nivel 5: Minimax completo.
+- Selector de jugador inicial (**X** u **O**).
+- Selector de tema visual (**oscuro** o **claro**).
+- Marcador persistente para victorias de X, victorias de O/IA y empates.
+- Persistencia de preferencias de modo, dificultad, primer turno y tema en `localStorage`.
+- Acciones para **deshacer jugada**, **reiniciar partida** y **borrar marcador**.
+- Estados de turno, victoria y empate con mensajes visibles y `aria-live`.
+- Resaltado de la combinación ganadora.
+- Controles y celdas con etiquetas ARIA básicas.
 - Interfaz responsive para escritorio, tablet y móvil.
-- Favicon SVG propio del juego.
-- Backend Django mínimo para renderizar la vista principal y servir recursos estáticos.
-- Configuración base para despliegue WSGI con Gunicorn y WhiteNoise.
+- Favicon SVG del juego.
+- Configuración de archivos estáticos con WhiteNoise.
+- Configuración WSGI lista para correr con Gunicorn.
+
+### Limitaciones conocidas
+
+- No hay autenticación ni perfiles de usuario.
+- No hay persistencia en base de datos para partidas o marcadores; el estado se guarda localmente en el navegador.
+- No hay suite de pruebas automatizadas incluida todavía.
+- La configuración actual es de desarrollo: `DEBUG = True`, `SECRET_KEY` fija y `ALLOWED_HOSTS = ['*']`.
+- La base de datos SQLite está configurada por defecto, aunque la app actual no define modelos propios.
 
 ## Stack tecnológico
 
 | Capa | Tecnología | Uso en el proyecto |
 | --- | --- | --- |
-| Backend | Python 3.10+ | Runtime principal de la aplicación. |
-| Backend web | Django 4.2+ | Servidor, ruteo y renderizado de la plantilla del juego. |
-| Frontend | HTML5, CSS3 y JavaScript ES6+ | Interfaz, estilos, estado de partida e IA del juego. |
-| Persistencia local | `localStorage` | Preferencias del usuario y marcador. |
+| Runtime | Python 3.10+ | Ejecución del proyecto Django. |
+| Backend web | Django 4.2+ | Ruteo, vista principal, templates y estáticos. |
+| Frontend | HTML5, CSS3 y JavaScript ES6+ | Interfaz, tablero, reglas, IA y estado de partida. |
+| Persistencia local | `localStorage` | Preferencias de usuario y marcador. |
 | Base de datos | SQLite | Configuración por defecto de Django para entorno local. |
 | Producción | Gunicorn | Servidor WSGI recomendado para despliegue. |
-| Archivos estáticos | WhiteNoise | Servicio de estáticos en entornos productivos. |
-| Deploy sugerido | Render | Plataforma objetivo documentada para despliegue. |
+| Archivos estáticos | WhiteNoise | Servicio de assets estáticos en despliegues WSGI. |
+| Deploy sugerido | Render | Plataforma objetivo contemplada por la configuración actual. |
 
 ## Requisitos
 
@@ -52,8 +70,9 @@ El proyecto se encuentra en estado **funcional**. Actualmente permite jugar part
 
 ## Ejecución local
 
-1. Clonar el repositorio.
-2. Crear y activar un entorno virtual (opcional, recomendado):
+1. Clonar el repositorio y entrar al directorio del proyecto.
+
+2. Crear y activar un entorno virtual (recomendado):
 
 ```bash
 python -m venv .venv
@@ -66,7 +85,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-4. Aplicar migraciones:
+4. Aplicar migraciones de Django:
 
 ```bash
 python manage.py migrate
@@ -78,15 +97,35 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-6. Abrir en el navegador:
+6. Abrir la app en el navegador:
 
 ```text
 http://127.0.0.1:8000/
 ```
 
-## Despliegue en Render
+## Comandos útiles
 
-Para desplegar en Render u otra plataforma compatible con WSGI, se recomienda usar un comando de build que instale dependencias, ejecute `collectstatic` y aplique migraciones.
+Verificar la configuración del proyecto:
+
+```bash
+python manage.py check
+```
+
+Recolectar archivos estáticos para producción:
+
+```bash
+python manage.py collectstatic --noinput
+```
+
+Ejecutar con Gunicorn:
+
+```bash
+gunicorn tictactoe_project.wsgi:application
+```
+
+## Despliegue en Render o WSGI
+
+Para Render u otra plataforma compatible con WSGI, se puede usar un flujo de build que instale dependencias, recolecte estáticos y aplique migraciones.
 
 Comando sugerido de build:
 
@@ -100,7 +139,11 @@ Comando sugerido de inicio:
 gunicorn tictactoe_project.wsgi:application
 ```
 
-> Nota: la configuración actual usa `DEBUG = True`, `SECRET_KEY` de desarrollo y `ALLOWED_HOSTS = ['*']`. Para un despliegue público conviene mover esos valores a variables de entorno y desactivar `DEBUG`.
+Antes de publicar la app, se recomienda mover a variables de entorno:
+
+- `SECRET_KEY`
+- `DEBUG`
+- `ALLOWED_HOSTS`
 
 ## Estructura general
 
@@ -117,6 +160,7 @@ gunicorn tictactoe_project.wsgi:application
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
+├── LICENSE
 ├── manage.py
 ├── requirements.txt
 └── README.md
@@ -125,6 +169,11 @@ gunicorn tictactoe_project.wsgi:application
 ## Próximos pasos sugeridos
 
 - Externalizar `SECRET_KEY`, `DEBUG` y `ALLOWED_HOSTS` mediante variables de entorno.
-- Agregar pruebas automatizadas para vistas Django y funciones críticas del frontend.
+- Agregar pruebas automatizadas para la vista Django y la lógica crítica del frontend.
 - Incorporar una pantalla de ayuda con reglas del juego y descripción de niveles de IA.
-- Evaluar empaquetado de assets o linting para JavaScript/CSS si el frontend crece.
+- Guardar historial de partidas o marcadores en base de datos si se agregan usuarios.
+- Evaluar linting/formateo para JavaScript y CSS si el frontend sigue creciendo.
+
+## Licencia
+
+Este proyecto usa una licencia propietaria. Ver `LICENSE` para más detalles.
